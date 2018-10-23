@@ -1,0 +1,213 @@
+
+body {
+    background-color: rgb(1, 50, 67);
+    font-family: 'Mountains of Christmas', cursive;
+    overflow: hidden;
+}
+
+.gifts--container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
+
+.centering {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    height: 100%;
+    width: 90%;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    
+}
+
+.gift--container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 100%;
+    height: 150px;
+    background-color: rgba(250, 250, 250, 0.9);
+    border-radius: 20px;
+    font-size: 60px;
+    transition:  1.0s transform;
+    animation: fadeIn 1s linear;
+    transform: scale(0.0, 0.0);
+    z-index: 999;
+
+}
+
+.snowy {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.gift--container.active {
+    transform: scale(1.15, 1.15);
+    
+}
+
+.gift--container.inactive {
+    transform: translate(-400px,400px) scale(0.01, 0.01);
+    animation: fadeOut 1s linear;
+    opacity: 0;
+}
+
+.gift--text {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+@keyframes fadeOut {
+    from {opacity: 1}
+    to {opacity: 0}
+}
+
+.cutie--right {
+    height: 100px;
+    width: auto;
+    position: absolute;
+    right: 0;
+}
+
+.cutie--left {
+    height: 100px;
+    width: auto;
+    position: absolute;
+    left: 0;
+
+}
+
+.icon--connecting {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: ghostwhite;
+    transition: 1.0s transform;
+    z-index: 30;
+    margin: 0 auto;
+    top: 10%;
+    right: 0;
+    left: 0;
+}
+
+
+.icon--connecting.active {
+    animation: loading 4s linear infinite;
+}
+
+.icon--connecting.inactive {
+    display: none;
+}
+
+@keyframes loading {
+    30% {transform: translate(500px, 0px) scale(1.5, 1.5); background-color: rgba(0, 128, 0, 0.5);}
+    50% {transform: translate(0px, 0px), scale(1.0, 1.0); background-color: ghostwhite;}
+    60% {transform: translate(-500px, 0px) scale(1.0, 1.0); background-color: rgba(0, 128, 0, 0.5);}
+    90% {transform: translate(0px, 0px) scale(1.5, 1.5); background-color: rgba(0, 128, 0, 0.5);}
+}
+
+.icon--rn {
+    position: absolute;
+    width: 20%;
+    right: 0px;
+}
+
+.icon--ra {
+    position: absolute;
+    width: 20%;
+    left: 0px;
+}
+
+.icon--ct {
+    position: fixed;
+    height: 20%;
+
+    bottom: -3%;
+}
+
+.icon--ct.i0 {
+    left: 0px;
+}
+
+.icon--ct.i1 {
+    left: 20%;
+
+}
+
+.icon--ct.i2 {
+    left: 30%;
+    right: 30%;
+}
+
+.icon--ct.i3 {
+    right: 20%
+}
+
+.icon--ct.i4 {
+    right: 0px;
+}
+
+.info--ipheader {
+  position: fixed;
+  color: white;
+  left: 10px;
+  top 10px;
+
+  font-size: 20px;
+  font-family: monospace;
+}
+
+
+@media (max-width: 1024px) and (min-width: 700px) {
+    .gift--container {
+        font-size: 40px;
+        height: 100px;
+    }
+
+    .info--ipheader {
+      font-size: 15px;
+    }
+
+    .cutie--right {
+        height:  50px;
+    }
+
+    .cutie--left {
+        height: 50px;
+    }
+}
+
+@media (max-width: 699px)  {
+    .gift--container {
+        font-size: 20px;
+        height: 60px;
+    }
+
+    .info--ipheader {
+      font-size: 10px;
+    }
+
+    .cutie--right {
+        height: 30px;
+    }
+
+    .cutie--left {
+        height: 30px;
+    }
+    
+}

@@ -1,0 +1,6 @@
+
+.venv
+logging/
+__pycache__
+.DS_Store
+.ropeproject/
