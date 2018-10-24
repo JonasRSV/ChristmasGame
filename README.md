@@ -26,3 +26,6 @@ Start Socket and GUI with
 ```bash
 python3 xmas.py
 ```
+
+# Known Errors
+  * Will crash on small screens because curses can't find space to render all the text
