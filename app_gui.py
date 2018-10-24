@@ -213,7 +213,8 @@ class Gui(threading.Thread):
             self.packages)
         """ Display score. """
         self.__information("Heuristic: {} - Goal {} - Random {}".format(
-            heuristic_score, goal_score, random_score))
+            round(heuristic_score, 3), round(goal_score, 3),
+            round(random_score, 3)))
 
     def stop(self) -> None:
         if self.running:
