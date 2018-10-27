@@ -11,6 +11,13 @@ GUI
 ![Gui](images/GUI.png)
 
 
+Interface
+---
+
+![Interface](images/interface_1.png)
+![Interface](images/interface_2.png)
+
+
 ## Install
 ```bash
 pip3 install -r requirements.txt
