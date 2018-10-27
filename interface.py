@@ -2,7 +2,7 @@ from abc import abstractmethod
 from geventwebsocket import WebSocketApplication
 
 
-class Facts(WebSocketApplication):
+class Interface(WebSocketApplication):
     def __init__(self, *args):
         WebSocketApplication.__init__(self, *args)
         self.state = self.ws.handler.server.state
@@ -18,3 +18,4 @@ class Facts(WebSocketApplication):
     @abstractmethod
     def on_close(self, reason: str) -> None:
         pass
+

@@ -1,0 +1,119 @@
+html, body {
+    background-color: rgb(1, 50, 67);
+    color: white;
+    font-family: 'Mountains of Christmas', cursive;
+    overflow: hidden;
+
+    height: 100%;
+    width: 100%;
+}
+
+.snowy {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
+
+.interface-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: transparent;
+  z-index: -1000;
+
+  height: 98%;
+  width: 98%;
+
+  margin: auto 2%;
+
+  left: 0;
+  right 0;
+}
+
+.option-container {
+  z-index: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 70%;
+}
+
+.information-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 30px;
+}
+
+#client-name {
+  display: block;
+  width: 250px;
+  height: 50px;
+  font-size: 30px;
+  text-align: center;
+  border-radius: 10px;
+  z-index: 999;
+  margin-top: 18%;
+
+  animation: name-appear linear 0.5s;
+}
+
+#package-add {
+  display: none;
+  width: 30%;
+  height: auto;
+  z-index: 999;
+}
+
+#name {
+  position: fixed;
+  top 5px;
+  right: 40px;
+  z-index: 1;
+  font-size: 30px;
+}
+
+#name:hover {
+  cursor: pointer;
+}
+
+@keyframes name-appear {
+  0% {transform: translateY(-500px); }
+  100% {transform: translateY(0px); }
+}
+
+@keyframes name-disappear {
+  0% {transform: translateY(0px); }
+  100% {transform: translateY(-500px); }
+}
+
+@keyframes gift-add {
+    0% {transform: scale(1.00, 1.00);}
+    25% {transform: rotate(7deg) scale(1.2, 1.2);}
+    50% {transform: rotate(-7deg) scale(1.1, 1.2);}
+    75% {transform: scale(1.2, 1.2);}
+    100% {transform: scale(1.00, 1.00);}
+}
+
+@keyframes gift-disappear {
+    0% {transform: scale(1.00, 1.00);}
+    100% {transform: scale(0.01, 0.01) rotate(180deg); opacity: 0.01;}
+}
+
+@keyframes  gift-appear {
+  0% {transform: scale(0.01, 0.01) rotate(180deg); opacity: 0.01;}
+  100% {transform: scale(1.0, 1.0) rotate(0deg); opacity: 1.0;}
+}
+
+
+@media (max-width: 699px)  {
+  .information-container {
+    font-size: 20px;
+  }
+
+  #package-add {
+    width: 60%;
+  }
+    
+}

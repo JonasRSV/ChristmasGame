@@ -10,6 +10,10 @@ class Gui(threading.Thread):
         self.santa = santa
 
     @abstractmethod
+    def add_package(self):
+        pass
+
+    @abstractmethod
     def stop(self):
         pass
 

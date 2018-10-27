@@ -9,7 +9,6 @@ class GuiImpl(Gui):
     def __init__(self, *args):
         Gui.__init__(self, *args)
 
-        self.packages = []
         self.package_index = 0
         """ Window Objects. """
         self.display_window = None
@@ -18,24 +17,6 @@ class GuiImpl(Gui):
         self.stdscr = None
 
         self.running = False
-
-    def __display_packages(self) -> None:
-        X_index = 1
-        for index, package in enumerate(
-                reversed(self.packages[:self.package_index])):
-
-            Y_index = (index % (curses.LINES - 2)) + 1
-
-            if X_index > curses.COLS:
-                break
-
-            self.display_window.addstr(Y_index, X_index, "{} - {}".format(
-                index, package), curses.A_BOLD)
-
-            if (index + 1) % (curses.LINES - 2) == 0:
-                X_index += 15
-
-        self.display_window.refresh()
 
     def __initialize_screen(self) -> None:
         self.stdscr = curses.initscr()
@@ -82,6 +63,24 @@ class GuiImpl(Gui):
         self.display_window.border()
         self.display_window.refresh()
 
+    def __display_packages(self) -> None:
+        X_index = 1
+        for index, package in enumerate(
+                reversed(self.state.packages[:self.package_index])):
+
+            Y_index = (index % (curses.LINES - 2)) + 1
+
+            if X_index > curses.COLS:
+                break
+
+            self.display_window.addstr(Y_index, X_index, "{} - {}".format(
+                index, package), curses.A_BOLD)
+
+            if (index + 1) % (curses.LINES - 2) == 0:
+                X_index += 15
+
+        self.display_window.refresh()
+
     def __information(self, text: str) -> None:
         self.input_window.addstr(3 * int(curses.LINES / 30),
                                  1 * int(curses.COLS / 30),
@@ -117,9 +116,9 @@ class GuiImpl(Gui):
             package = package.strip().lower()
 
             if len(package) > 0:
-                self.packages.append(package)
+                self.state.packages.append(package)
 
-        self.package_index = len(self.packages)
+        self.package_index = len(self.state.packages)
         self.__display_packages()
         self.__information("Add successful")
 
@@ -136,16 +135,17 @@ class GuiImpl(Gui):
 
             absolute_index = self.package_index - index - 1
 
-            if absolute_index >= 0 and absolute_index < len(self.packages):
-                del self.packages[absolute_index]
+            if absolute_index >= 0 and absolute_index < len(
+                    self.state.packages):
+                del self.state.packages[absolute_index]
         """ Remove removed packages from list. """
         packages = []
-        for package in self.packages:
+        for package in self.state.packages:
             if package is not None:
                 packages.append(package)
         """ Update packages & Index. """
-        self.packages = packages
-        self.package_index = min(self.package_index, len(self.packages))
+        self.state.packages = packages
+        self.package_index = min(self.package_index, len(self.state.packages))
 
         self.__refresh_display_page()
         self.__display_packages()
@@ -167,8 +167,8 @@ class GuiImpl(Gui):
         self.__refresh_input_page("p")
         self.package_index += 1
 
-        if self.package_index > len(self.packages):
-            self.package_index = len(self.packages)
+        if self.package_index > len(self.state.packages):
+            self.package_index = len(self.state.packages)
 
         self.__display_packages()
         self.__update_server_package()
@@ -180,8 +180,8 @@ class GuiImpl(Gui):
 
     def __update_server_package(self) -> None:
         name = "Merry Xmas"
-        if len(self.packages) > self.package_index >= 0:
-            name = self.packages[self.package_index]
+        if len(self.state.packages) > self.package_index >= 0:
+            name = self.state.packages[self.package_index]
         """ Format the name in a nice way. Captialize is nice!"""
         name = list(name)
         name[0] = name[0].capitalize()
@@ -192,17 +192,26 @@ class GuiImpl(Gui):
         self.__refresh_display_page()
         self.__refresh_input_page("s")
         """ Sorts the packages. """
-        self.packages = self.santa(self.packages)
+        self.state.packages = self.santa(self.state.packages)
         """ Update Screen. """
         self.__display_packages()
         """ Get them stats. """
         heuristic_score, goal_score, random_score, order_score = self.santa.sorting_statistics(
-            self.packages)
+            self.state.packages)
         """ Display score. """
         self.__information(
             "Heuristic: {} - Goal {} - Random {} - Order {}".format(
                 round(heuristic_score, 3), round(goal_score, 3),
                 round(random_score, 3), round(order_score, 3)))
+
+    @overrides
+    def add_package(self, package: str) -> None:
+        if package:
+            self.state.packages.append(package.strip().lower())
+            self.package_index = len(self.state.packages)
+            self.__refresh_display_page()
+            self.__display_packages()
+            self.__information("Remote add")
 
     @overrides
     def stop(self) -> None:

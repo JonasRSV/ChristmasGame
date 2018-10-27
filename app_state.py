@@ -7,6 +7,7 @@ class State():
     def __init__(self):
         self._package = "Ready for Xmas"
         self._logger, self._logfile = self.__setup_logging()
+        self.__packages = []
 
     def __setup_logging(self) -> "logger":
         logger = logging.getLogger("Client")
@@ -29,9 +30,17 @@ class State():
     def package(self) -> str:
         return self._package
 
+    @property
+    def packages(self) -> list:
+        return self.__packages
+
     @package.setter
     def package(self, package: str) -> None:
         self._package = package
+
+    @packages.setter
+    def packages(self, packages: list) -> None:
+        self.__packages = packages
 
     @property
     def logger(self):
@@ -44,3 +53,8 @@ class State():
     def clean(self):
         self._logfile.flush()
         self._logfile.close()
+
+    def add_package(self, package: str) -> None:
+        """ This method will implemented by GUI. """
+        raise NotImplementedError(
+            "This method should be overridden by GUI add_package. ")
