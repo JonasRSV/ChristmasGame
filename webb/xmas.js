@@ -1,7 +1,7 @@
 //const SOCKET_URL = "ws://192.168.10.222:8000/";
 //const SOCKET_URL = "ws://172.26.5.176:8000/";
-const SOCKET_URL = "ws://" + window.location.hostname + ":8000/"
-const hostIP = document.createTextNode("http://" + window.location.hostname + ":" + window.location.port)
+const SOCKET_URL = "ws://" + window.location.hostname + ":8000/game"
+const hostIP = document.createTextNode("http://" + window.location.hostname + ":" + window.location.port + "/game")
 var PACKAGE_TEXT = null
 var PACKAGE_CONTAINER = null
 var UPDATE_POLL = null

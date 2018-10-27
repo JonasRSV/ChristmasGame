@@ -47,7 +47,8 @@ class Santa(object):
         random_eval = self.evaluate_sort(random_giftorder)
         heuristic_eval = self.evaluate_sort(giftorder)
         goal_eval = int(len(giftorder) / (min(counts.values()) + 1))
-        order_eval = max((sum(counts.values()) - min(counts.values()) * (len(counts) - 2)) + 1, len(counts))
+        order_eval = max((sum(counts.values()) - min(counts.values()) *
+                          (len(counts) - 2)) + 1, len(counts))
 
         return heuristic_eval, goal_eval, random_eval, order_eval
 

@@ -1,4 +1,3 @@
-import copy
 from abc import abstractmethod
 from geventwebsocket import WebSocketApplication
 

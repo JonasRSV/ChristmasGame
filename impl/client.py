@@ -1,7 +1,6 @@
 from geventwebsocket.exceptions import WebSocketError
 from overrides import overrides
 import client
-import logging
 
 class ClientImpl(client.Client):
     @overrides

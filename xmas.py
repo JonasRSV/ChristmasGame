@@ -1,4 +1,5 @@
 import impl.client as client
+import impl.facts as facts
 import impl.heap_santa as santa
 import impl.gui as gui
 import threading
@@ -9,7 +10,9 @@ from app_state import State
 
 if __name__ == "__main__":
     xmas = WebSocketServer(('0.0.0.0', 8000),
-                           Resource(OrderedDict([('/', client.ClientImpl)])))
+                           Resource(
+                               OrderedDict([('/game', client.ClientImpl),
+                                            ('/facts', facts.FactsImpl)])))
 
     application_state = State()
     application_gui = gui.GuiImpl(application_state,
