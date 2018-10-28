@@ -70,7 +70,7 @@ InitializeSocketComms = () => {
 runGame = () => {
     snowyRun();
     PACKAGE_CONTAINER = document.getElementById("gifts");
-    UpdateText("Xmas Game 2017");
+    UpdateText("Connecting...");
 
     InitializeSocketComms();
 

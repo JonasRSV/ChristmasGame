@@ -54,7 +54,7 @@ html, body {
   text-align: center;
   border-radius: 10px;
   z-index: 999;
-  margin-top: 18%;
+  margin-top: 100px;
 
   animation: name-appear linear 0.5s;
 }
@@ -121,6 +121,19 @@ html, body {
 
   #package-add {
     width: 60%;
+  }
+
+  #client-name {
+    width: 50%;
+    height: 30px;
+    font-size: 20px;
+    margin-top: 50px;
+  }
+
+  #name {
+    top: 1px;
+    right: 3px;
+    font-size: 14px;
   }
     
 }

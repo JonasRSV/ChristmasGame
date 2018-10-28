@@ -190,6 +190,11 @@ body {
     .cutie--left {
         height: 50px;
     }
+
+  .icon--connecting {
+      height: 25px;
+      width: 25px;
+  }
 }
 
 @media (max-width: 699px)  {
@@ -209,5 +214,9 @@ body {
     .cutie--left {
         height: 30px;
     }
-    
+
+  .icon--connecting {
+      height: 10px;
+      width: 10px;
+  }
 }

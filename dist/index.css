@@ -1,0 +1,83 @@
+
+html, body {
+    background-color: rgb(1, 50, 67);
+    color: white;
+    font-family: 'Mountains of Christmas', cursive;
+    overflow: hidden;
+
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.xmas-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 40px;
+  height: 20%;
+}
+
+.xmas-header:hover {
+  animation: wiggle 1s linear infinite;
+}
+
+.iframe-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 70%;
+}
+
+.frame {
+  width: 40%;
+  margin-top: 1%;
+  position: relative;
+}
+
+#interface-frame-click {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#game-frame-click {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media (max-width: 699px)  {
+  .iframe-container {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .frame {
+    width: 95%;
+  }
+}
+
+@keyframes wiggle {
+  0% {}
+  30% {transform: rotate(20deg);  }
+  60% {transform: rotate(-20deg); }
+  100% {transform: rotate(0deg); }
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+}
