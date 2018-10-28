@@ -45,14 +45,16 @@ setupEventListeners = () => {
             // Not sure how it is intended to apply temporary keyframe animations
             // this hack works though
             package_add.style.animation = "gift-add 1s linear";
-            setTimeout(() => package_add.style.animation = null, 950)
+            setTimeout(() => package_add.style.animation = null, 950);
         } else {
+            document.body.style.animation = "gift-add-fail 2s linear";
+            setTimeout(() => document.body.style.animation = null, 2000);
             console.log("Socket is not open")
         }
 
     }, false);
 
-    input_field.addEventListener("keypress", (data) => {
+    input_field.addEventListener("keydown", (data) => {
         if (data["key"] === "Enter") {
             CLIENT_NAME = input_field.value
             name_field.innerHTML = CLIENT_NAME
@@ -68,6 +70,8 @@ setupEventListeners = () => {
                 setTimeout(() => package_add.style.animation = null, 950)
             }, 450);
 
+        } else if (data["key"].length > 2) {
+            setTimeout(() => name_field.innerHTML = input_field.value, 10)
         } else {
             name_field.innerHTML = input_field.value + data["key"]
         }
@@ -89,7 +93,7 @@ setupEventListeners = () => {
 
         }, 950)
 
-    }, false)
+    }, false);
 }
 
 // Data

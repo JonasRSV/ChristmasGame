@@ -8,7 +8,8 @@ from geventwebsocket import WebSocketServer, Resource
 from collections import OrderedDict
 from app_state import State
 
-if __name__ == "__main__":
+
+def main():
     xmas = WebSocketServer(('0.0.0.0', 8000),
                            Resource(
                                OrderedDict([('/xmas', client.ClientImpl),
@@ -32,3 +33,7 @@ if __name__ == "__main__":
 
     application_state.clean()
     application_gui.stop()
+
+
+if __name__ == "__main__":
+    main()

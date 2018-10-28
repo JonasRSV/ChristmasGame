@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if ! [ -x "$(command -v pip3)" ]; then
+  echo 'Error: pip3 is not installed.' >&2
+  exit 1
+fi
+
+if ! [ -x "$(command -v docker)" ]; then
+  echo 'Error: docker is not installed.' >&2
+  exit 1
+fi
+
+if ! [ -x "$(command -v virtualenv)" ]; then
+  echo 'Error: virtualenv is not installed.' >&2
+  exit 1
+fi
+
+if [[ "$VIRTUAL_ENV" == "" ]]
+then
+  echo "Setting up Virtualenv..."
+  virtualenv -p python3 .venv
+fi
+
+echo "\n\n Installing Requirements."
+pip3 install -r requirements.txt
+
+echo "\n\n Setting up docker image"
+docker build -t xmas .
+
+echo "\n\nCreating Container..."
+docker create -p 80:80 --name Christmas xmas:latest
+
+
+echo "\n\nServer up and running (hopefully)"
+echo "\nRun ./xmas to start the sockets and GUI"
