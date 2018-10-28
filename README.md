@@ -18,20 +18,16 @@ Interface
 ![Interface](images/interface_2.png)
 
 
-## Install
+## Install & Run
+
+Install requirements and setup docker with the following command:
 ```bash
-pip3 install -r requirements.txt
+> source setup
 ```
 
-## Play
-Start server from webb/ with
-```bash
-python3 -m http.server --bind "0.0.0.0" 80
-```
-
-Start Socket and GUI with
-```bash
-python3 xmas.py
+Start the sockets & GUI with the following command:
+``` bash
+> ./xmas
 ```
 
 # Known Errors
