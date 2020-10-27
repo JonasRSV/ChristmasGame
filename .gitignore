@@ -4,3 +4,5 @@ logging/
 __pycache__
 .DS_Store
 .ropeproject/
+.idea/
+app/.idea

@@ -1,4 +1,3 @@
-import time
 import curses
 from app_gui import Gui
 from curses.textpad import Textbox
@@ -24,10 +23,14 @@ class GuiImpl(Gui):
         curses.cbreak()
         self.stdscr.keypad(True)
 
-        self.input_window = curses.newwin(curses.LINES, int(curses.COLS / 2),
-                                          0, 0)
-        self.display_window = curses.newwin(curses.LINES, int(curses.COLS / 2),
-                                            0, int(curses.COLS / 2))
+        self.input_window = curses.newwin(curses.LINES,
+                                          int(curses.COLS / 2),
+                                          0,
+                                          0)
+        self.display_window = curses.newwin(curses.LINES,
+                                            int(curses.COLS / 2),
+                                            0,
+                                            int(curses.COLS / 2))
 
         self.textbox_win = self.input_window.subwin(
             30, 60, 9 * int(curses.LINES / 30), 2 * int(curses.COLS / 30))
@@ -56,6 +59,7 @@ class GuiImpl(Gui):
         self.input_window.addstr(4 * int(curses.LINES / 30),
                                  2 * int(curses.COLS / 30), indicator,
                                  curses.A_STANDOUT)
+
         self.input_window.refresh()
 
     def __refresh_display_page(self) -> None:
@@ -135,7 +139,7 @@ class GuiImpl(Gui):
 
             absolute_index = self.package_index - index - 1
 
-            if absolute_index >= 0 and absolute_index < len(
+            if 0 <= absolute_index < len(
                     self.state.packages):
                 del self.state.packages[absolute_index]
         """ Remove removed packages from list. """
@@ -196,13 +200,12 @@ class GuiImpl(Gui):
         """ Update Screen. """
         self.__display_packages()
         """ Get them stats. """
-        heuristic_score, goal_score, random_score, order_score = self.santa.sorting_statistics(
+        optimized_score, random_score = self.santa.sorting_statistics(
             self.state.packages)
         """ Display score. """
         self.__information(
-            "Heuristic: {} - Goal {} - Random {} - Order {}".format(
-                round(heuristic_score, 3), round(goal_score, 3),
-                round(random_score, 3), round(order_score, 3)))
+            "Optimized: {} - Random {} ".format(
+                round(optimized_score, 3), round(random_score, 3)))
 
     @overrides
     def add_package(self, package: str) -> None:

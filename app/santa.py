@@ -23,34 +23,39 @@ class Santa(object):
         return giftorder
 
     def evaluate_sort(self, giftorder: list) -> float:
-        """ Max Delta """
-        max_delta = 0
+        max_delta = {}
         observation = {}
+
+        score = 0
+        previous_gift = None
         for index, gift in enumerate(giftorder):
             if gift not in observation:
-                observation[gift] = 0
+                observation[gift] = index
 
-            max_delta = max(max_delta, index - observation[gift] - 1)
+            if gift not in max_delta:
+                max_delta[gift] = 0
+
+            max_delta[gift] = max(max_delta[gift], index - observation[gift] - 1)
             observation[gift] = index
 
-        for obs in observation.values():
-            max_delta = max(max_delta, len(giftorder) - obs - 1)
+            if gift == previous_gift:
+                score += 100
 
-        return max_delta
+            previous_gift = gift
+
+        score += sum(max_delta.values())
+
+        return score
 
     def sorting_statistics(self, giftorder: list) -> (float, float, float):
         """ Max delta & Goal & Random & Order """
         random_giftorder = copy(giftorder)
         random.shuffle(random_giftorder)
 
-        counts = Counter(giftorder)
         random_eval = self.evaluate_sort(random_giftorder)
         heuristic_eval = self.evaluate_sort(giftorder)
-        goal_eval = int(len(giftorder) / (min(counts.values()) + 1))
-        order_eval = max((sum(counts.values()) - min(counts.values()) *
-                          (len(counts) - 2)) + 1, len(counts))
 
-        return heuristic_eval, goal_eval, random_eval, order_eval
+        return heuristic_eval, random_eval
 
     @abstractmethod
     def sort(self, gifts: list) -> list:

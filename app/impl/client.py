@@ -2,6 +2,7 @@ from geventwebsocket.exceptions import WebSocketError
 from overrides import overrides
 import client
 
+
 class ClientImpl(client.Client):
     @overrides
     def on_message(self, message) -> None:

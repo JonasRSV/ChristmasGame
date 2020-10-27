@@ -35,10 +35,15 @@ UpdateText = (text) => {
 }
 
 UpdateGift = (text) => {
+  console.log("Updating Gift");
     if (text != PACKAGE_TEXT) {
+        
+        /* Hacky fix of a bug */
+        PACKAGE_TEXT = text;
+
         PACKAGE_CONTAINER.firstElementChild.className = "gift--container inactive"
-        setTimeout(() => UpdateText(text), 1500);
-        setTimeout(() => PACKAGE_CONTAINER.removeChild(PACKAGE_CONTAINER.lastElementChild), 1500);
+        setTimeout(() => UpdateText(text), 700);
+        setTimeout(() => PACKAGE_CONTAINER.removeChild(PACKAGE_CONTAINER.lastElementChild), 700);
     }
 }
 
@@ -50,7 +55,7 @@ InitializeSocketComms = () => {
 
     //Open and recieve
     socket.onopen = () => {
-      UPDATE_POLL = setInterval(() => socket.send("Ping"), 2000);
+      UPDATE_POLL = setInterval(() => socket.send("Ping"), 500);
       connectingIcon.className = "icon--connecting inactive";
     }
 

@@ -1,9 +1,7 @@
 import impl.client as client
 import impl.interface as interface
-import impl.heap_santa as santa
+import impl.santa as santa
 import impl.gui as gui
-import threading
-import time
 from geventwebsocket import WebSocketServer, Resource
 from collections import OrderedDict
 from app_state import State
@@ -18,7 +16,7 @@ def main():
 
     application_state = State()
     application_gui = gui.GuiImpl(application_state,
-                                  santa.SantaImpl(application_state))
+                                  santa.GaOptimizingSanta(application_state))
     """ So that interface can update the packages aswell. """
     application_state.add_package = application_gui.add_package
     """ Make state reachable throughout all applications """
