@@ -1,6 +1,6 @@
 click==6.7
 colorlog==3.1.4
-gevent==1.2.2
+gevent==23.9.1
 gevent-websocket==0.10.1
 greenlet==0.4.12
 itsdangerous==0.24
